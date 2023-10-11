@@ -23,12 +23,19 @@ void setup()
   pinMode(LED_Yellow, OUTPUT);
   pinMode(LED_Green, OUTPUT);
 }
-//(car_1==LOW)&&(car_2==HIGH)||(car_1==HIGH)&&(car_3==HIGH)||(car_3==HIGH)&&(car_2==HIGH)
 void loop()
 {
+  byte x;
+  byte y;
+  byte z;
+  x=digitalRead(car_1);
+  y=digitalRead(car_2);
+  z=digitalRead(car_3);
+  
   digitalWrite(LED_Red,HIGH);
+  
   Serial.println(car_1);
-  if(car_1==LOW)
+  if((x==LOW)&&(y==HIGH)||(x==HIGH)&&(z==HIGH)||(y==HIGH)&&(z==HIGH))
   {
     digitalWrite(LED_Green,HIGH);
     delay(traffic_delay);
