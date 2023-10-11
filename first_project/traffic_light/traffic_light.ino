@@ -1,6 +1,6 @@
 // C++ code
 //
-#define cars 3
+
 #define traffic_delay 5000
 
 #define LED_Red        13
