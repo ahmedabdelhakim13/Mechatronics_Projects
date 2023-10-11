@@ -34,7 +34,7 @@ void loop()
   
   digitalWrite(LED_Red,HIGH);
   
-  Serial.println(car_1);
+  
   if((x==LOW)&&(y==HIGH)||(x==HIGH)&&(z==HIGH)||(y==HIGH)&&(z==HIGH))
   {
     digitalWrite(LED_Green,HIGH);
