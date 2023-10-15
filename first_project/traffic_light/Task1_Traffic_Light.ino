@@ -33,8 +33,8 @@ void loop()
     digitalWrite(YELLOW_LED, LOW);
     digitalWrite(RED_LED, LOW);
     digitalWrite(GREEN_LED, HIGH);
-    delay(5 * carsNum);
-    carsNum = 0;
+    delay(5 * carsNum);   //bug
+    carsNum = 0;         
     for(int i = 0 ; i<=5 ; i++)
     {
       digitalWrite(YELLOW_LED, !(digitalRead(YELLOW_LED)));
@@ -44,7 +44,7 @@ void loop()
     digitalWrite(GREEN_LED, LOW);
     digitalWrite(RED_LED, HIGH);
   }
-  else if((digitalRead(BUTTON)) && (digitalRead(GREEN_LED)))
+  else if((digitalRead(BUTTON)) && (digitalRead(GREEN_LED)))   //bug 
   {
     for(int i = 0 ; i<=5 ; i++)
     {
@@ -55,5 +55,5 @@ void loop()
     digitalWrite(GREEN_LED, LOW);
     digitalWrite(RED_LED, HIGH);
   }
-  delay(1000);
+  delay(500)S;
 }
