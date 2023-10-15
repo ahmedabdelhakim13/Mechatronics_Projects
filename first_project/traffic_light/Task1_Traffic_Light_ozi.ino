@@ -13,6 +13,7 @@
 #define BlinkingTime    1000
 #define CarTime         3000
 #define Repeat          1000
+#define CARS_LIMIT      2    /* this is the limit number of cars afterwhich our program get triggered and the green led lightens up */
                       
                       //Variable stores the number of cars.
 
@@ -32,7 +33,7 @@ void setup()
                         // Added Features.
   // Attach an interrupt to the button press event.
   attachInterrupt(digitalPinToInterrupt(BUTTON), buttonPressed, RISING);
-  pinMode(BUZZER, OUTPUT);
+  pinMode(BUZZER, OUTPUT);      /* we used a buzzer as a source of sound to help the blind people */
   pinMode(BUTTON, INPUT);
 }
                        
@@ -45,7 +46,7 @@ void loop()
   noTone( BUZZER );
   
   //Taking the reading of the pressure sensor.
-  int value = analogRead(PRESSURE);
+  int value = analogRead(PRESSURE);       /* we loop on the reading of the pressure sensor so we can detect whenever the user touches the sensor */
   
   // Count cars based on pressure sensor reading.
   if (value > 200)
@@ -54,12 +55,12 @@ void loop()
   }
   
   // Check if carsNum exceeds 2.
-  if (carsNum >= 2)
+  if (carsNum >= CARS_LIMIT)
   {
     // Blink the yellow LED and activate the buzzer.
-    for(int i = 0 ; i <= 3 ; i++)
+    for(int i = 0 ; i <= 3 ; i++) /*we blink the yellow led for 4 seconds*/
     {
-      digitalWrite(YELLOW_LED, !(digitalRead(YELLOW_LED)));
+      digitalWrite(YELLOW_LED, !(digitalRead(YELLOW_LED)));  /* some sort of blinking */
       delay(BlinkingTime);
     }
     
@@ -76,9 +77,9 @@ void loop()
     carsNum = 0;
    
     // Blink the yellow LED and reset the lights
-    for(int i = 0 ; i <= 3 ; i++)
+    for(int i = 0 ; i <= 3 ; i++) /*we blink the yellow led for 4 seconds*/
     {
-      digitalWrite(YELLOW_LED, !(digitalRead(YELLOW_LED)));
+      digitalWrite(YELLOW_LED, !(digitalRead(YELLOW_LED)));  /* some sort of blinking */
       delay(BlinkingTime);
     }
     // Turn off Green and Yellow LEDS and buzzer.
