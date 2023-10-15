@@ -1,6 +1,10 @@
 // C++ code
 //
+<<<<<<< Updated upstream
 //------------------------------------------------------------include------------------------------------------------------//
+=======
+#define cars 3
+>>>>>>> Stashed changes
 #define traffic_delay 10000
 
 #define LED_Red        13
