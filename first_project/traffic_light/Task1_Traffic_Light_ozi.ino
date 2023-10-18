@@ -48,7 +48,7 @@ void loop()
     digitalWrite(GREEN_LED, HIGH);
     
     // Delay for a time proportional to the number of cars counted
-    delay(CarTime * carsNum);
+    delay(CarTime);
     carsNum--;
     if (carsNum == 0)
     {
@@ -98,8 +98,7 @@ void pedestrianMode()
     digitalWrite(YELLOW_LED, LOW);
     digitalWrite(GREEN_LED, LOW);
     digitalWrite(RED_LED, HIGH);
-    
-    // Delay for 5 seconds
-    delay(5000);
   }
+  // Delay for 5 seconds
+    delay(5000);
 }
