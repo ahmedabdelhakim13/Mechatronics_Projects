@@ -13,7 +13,6 @@
 #define CARS_LIMIT        1  
 
 unsigned int carsNum = 0;
-
 void pedestrianMode();
 
 void setup() {
@@ -32,14 +31,18 @@ void loop()
   digitalWrite(RED_LED, HIGH);
   digitalWrite(YELLOW_LED, LOW);
   digitalWrite(GREEN_LED, LOW);
+  unsigned int iteration = 1;
   while(carsNum >= CARS_LIMIT)
   {
-    for(int i = 0 ; i <= 3 ; i++) /*we blink the yellow led for 4 seconds*/
+    if (iteration == 1)
     {
-      digitalWrite(YELLOW_LED, !(digitalRead(YELLOW_LED)));  /* some sort of blinking */
-      delay(BlinkingTime);
+      for(int i = 0 ; i <= 3 ; i++) /*we blink the yellow led for 4 seconds*/
+      {
+        digitalWrite(YELLOW_LED, !(digitalRead(YELLOW_LED)));  /* some sort of blinking */
+        delay(BlinkingTime);
+      }
     }
-    
+    iteration++;
     // Turn off RED and Yellow LEDS.
     digitalWrite(RED_LED, LOW);
     digitalWrite(YELLOW_LED, LOW);
