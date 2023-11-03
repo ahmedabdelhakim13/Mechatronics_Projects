@@ -1,11 +1,8 @@
-//SIMULATION LINK:
-//https://www.tinkercad.com/things/lze4OYEx4xh?sharecode=4BXy0RFFA9yZTxHMNck7bGfGA43kYuZdr8dieRSDFIU
+//Simulation Link: https://www.tinkercad.com/things/k4JWvAlLA3x
 
 #define MOTOR_PIN_1 8
 #define MOTOR_PIN_2 9
 #define MOTOR_SPEED_CONTROL_PIN 3
-
-
 
 void rotate_cw();
 void rotate_ccw();
@@ -15,10 +12,6 @@ void setup() {
   pinMode(MOTOR_SPEED_CONTROL_PIN,OUTPUT); // to control the speed of the motor
   pinMode(MOTOR_PIN_1,OUTPUT); //input2
   pinMode(MOTOR_PIN_2,OUTPUT); //input1
-
-  Serial.begin(9600);
-  
-
 }
 
 void loop()
@@ -27,9 +20,6 @@ void loop()
   delay(4000);
   rotate_ccw();
   delay(4000);
-
-  
-
 }
 void rotate_cw()
 {
