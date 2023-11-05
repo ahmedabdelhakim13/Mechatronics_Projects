@@ -9,7 +9,7 @@ const int targetSpeed = 0.6 * maxSpeed;  // Target speed at 0.6 of the maximum s
 int currentSpeed = 0;         // Current speed of the motor
 
 void setup() {
-  pinMode(motorPin, OUTPUT);
+  pinMode(MOTOR, OUTPUT);
 }
 
 void loop() {
