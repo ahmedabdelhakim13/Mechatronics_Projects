@@ -17,7 +17,7 @@ void loop() {
   if(volt)
   {
     if(volt>=4)
-    largestspeed()
+    speed1()
 
     else if(volt>=3)
     Speed2()
@@ -32,7 +32,7 @@ void loop() {
 
 }
 //defining function 
-void largestspeed()
+void speed1()
   {
       analogWrite(motor_pin,256);
       delay(1000);
