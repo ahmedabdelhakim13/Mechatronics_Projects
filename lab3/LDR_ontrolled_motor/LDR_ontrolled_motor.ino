@@ -1,11 +1,13 @@
 #define LDR A0
 #define motor_pin 3
+#define led 5
 float value=0.0;
 float volt=0.0;
 
 void setup() {
   Serial.begin(9600);
   pinMode(LDR,INPUT);
+  pinMode(Led,OUTPUT);
   pinMode(motor_pin,OUTPUT);
 }
 
@@ -13,6 +15,9 @@ void loop() {
   value=analogRead(LDR);
   Serial.println(value);
   delay(500);
+  if(value)
+  digitalWrite(led,HIGH);
+  delay(300);
   volt=(value/1023)*5;
   if(volt)
   {
