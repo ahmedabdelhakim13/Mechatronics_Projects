@@ -1,64 +1,69 @@
 #define LDR A0
 #define motor_pin 3
 #define led 5
-float value=0.0;
-float volt=0.0;
+#define pot 7
+#define start 8
+#define push1 9
+#define push1 10
+/////////////////////////////////////////////////////////////////////////////////////////
+int start=0; 
+int stat1=0;
+int stat2=0;
+int Ldr_value=0;
+int speed=0;
+///////////////////////////////////////////////////////////////////////////////////
 
 void setup() {
   Serial.begin(9600);
-  pinMode(LDR,INPUT);
+  pinMOde(start,INPUT)
+  pinMOde(push1,INPUT)
+  pinMOde(push2,INPUT)
   pinMode(Led,OUTPUT);
+  pinMode(LDR,OUTPUT);
   pinMode(motor_pin,OUTPUT);
 }
 
 void loop() {
-  value=analogRead(LDR);
-  Serial.println(value);
-  delay(500);
-  if(value)
-  digitalWrite(led,HIGH);
-  delay(300);
-  volt=(value/1023)*5;
-  if(volt)
-  {
-    if(volt>=4)
-    speed1()
+  start = digitalRead(start);
+  stat1 = digitalRead(push1);
+  stat2 = digitalRead(push2);
 
-    else if(volt>=3)
-    Speed2()
-    else if(volt>=2)
-    speed3()
-    else if(volt>=1)
-    speed4()
-    else
-    speed5()
+  if((stat1==1)&&(stat2==0))
+    func1();
+
+  if(((stat1==0)&&(stat2==1)))
+    func2();
+
+  if(((stat1==1)&&(stat2==1)))
+    func3();
+
   }
-  // put your main code here, to run repeatedly:
-
+  
 }
-//defining function 
-void speed1()
+///////////////////////////////////////////////////////////////
+void func1()
+{
+  if(start)
   {
-      analogWrite(motor_pin,256);
-      delay(1000);
-    }
-void speed2()
+    digitalWrite(led ,HIGH);
+    Ldr_value = analogRead(LDR);
+    if(Ldr_value>300)
     {
-      analogWrite(motor_pin,205);
-      delay(1000);
+    digitalWrite(motor_pin,200);
+    delay(2000);
     }
-    void speed3()
+  }
+  void func2()
+  {
+    if(start)
+  {
+    digitalWrite(led ,LOW);
+    Ldr_value = analogRead(LDR);
+    //speed =map(Ldr_value,0,1023,0,286);
+    if(Ldr_value>300)
     {
-      analogWrite(motor_pin,153);
-      delay(1000);
+    digitalWrite(motor_pin,200);
+    delay(2000);
     }
-    void speed4()
-    {
-      analogWrite(motor_pin,102);
-      delay(1000);
-    }
-    void speed5()
-    {
-      analogWrite(motor_pin,51);
-      delay(1000);
-    }
+  }
+}
