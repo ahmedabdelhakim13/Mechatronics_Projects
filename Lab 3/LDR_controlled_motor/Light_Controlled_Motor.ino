@@ -1,3 +1,6 @@
+//              THE SIMULATION LINK ON TINKERCAD
+//https://www.tinkercad.com/things/6acqqqypZAs-lab3?sharecode=0-9Kpq8cVF5yPpngqr2RUf48aAp1lEKc42seEivhU0E
+
 #define POT              A0   // Analog input pin for the potentiometer.
 #define LDR              A1   // Analog input pin for the LDR.
 #define LED              6    // LED pin.
