@@ -1,44 +1,39 @@
-#define POT              A0   // Analog input pin for the potentiometer.
-#define LDR              A1   // Analog input pin for the LDR.
+#define POT              0   // Analog input pin for the potentiometer.
+#define LDR              1   // Analog input pin for the LDR.
 #define LED              6    // LED pin.
 #define BUTTON_CASE_2    2    // push button pin for cases.
-#define BUTTON_CASE_3    3    // push button pin for cases.
+#define BUTTON_CASE_3    3		// push button pin for cases.
+#define VALUE            100
 
-#define MOTOR_PIN_1 8
-#define MOTOR_PIN_2 9
-#define MOTOR_SPEED_CONTROL_PIN 5
+#define MOTOR			       9
 
-#define value		100
-
+bool case2 = false;
+bool case3 = false;
 
 int LED_Intensity = 0; // Initialize Led intensity.
 int PotValue      = 0; // Initialize Potentiometer value.
 int LDR_Value     = 0; // Initialize LDR value.
 int MotorSpeed    = 0; // Initialize Motor speed.
 
-bool case2 = false;
-bool case3 = false;
-void setup() 
-{
+void setup() {
+  Serial.begin(9600);
+
   pinMode(POT , INPUT );             // Potentiometer as input.
   pinMode(LDR , INPUT );             // LDR as input.
   pinMode(BUTTON_CASE_2 , INPUT );   // Push button  as input.
   pinMode(BUTTON_CASE_3 , INPUT );   // Potentiometer as input.
-  //pinMode(MOTOR , OUTPUT );          // Motor as output.
   pinMode(LED  , OUTPUT );           // LED as output.
 
-  pinMode(MOTOR_SPEED_CONTROL_PIN,OUTPUT); // to control the speed of the motor
-  pinMode(MOTOR_PIN_1,OUTPUT); //input2
-  pinMode(MOTOR_PIN_2,OUTPUT); //input1
-  
+  pinMode(MOTOR, OUTPUT); //input1
+
   attachInterrupt(digitalPinToInterrupt(BUTTON_CASE_2), case2Control, RISING);
   attachInterrupt(digitalPinToInterrupt(BUTTON_CASE_3), case3Control, RISING);
-
-  Serial.begin(9600);
 }
 
-void loop()
-{                          /* For first task don't press on any buttons.*/
+void loop() 
+{
+  digitalWrite( LED , HIGH );
+                           /* For first task don't press on any buttons.*/
       /***********    first task is about motor is on when light intensity is high and it is off when light intensity is low   ***********/
     
     // Turn on LED.
@@ -50,34 +45,26 @@ void loop()
 
     // If the value read is less than the threshold then the motor is on, else the motor is off. 
     // when light intensity increase the value of the LDR decreases
-      if( LDR_Value <= value )  // ldr value is small below our own set threshold which means light intensity is high 
+      if( LDR_Value <= VALUE )  // ldr value is small below our own set threshold which means light intensity is high 
       {
-         digitalWrite(MOTOR_SPEED_CONTROL_PIN,HIGH);
-         digitalWrite(MOTOR_PIN_1,HIGH);
-         digitalWrite(MOTOR_PIN_2,LOW);
+         digitalWrite(MOTOR, HIGH);
          
       } 
       else  // ldr value is high over our own set threshold which means light intensity is low
       {
-         digitalWrite(MOTOR_SPEED_CONTROL_PIN,LOW);
+         digitalWrite(MOTOR, LOW);
       }
 
-   
 
     // Turn off LED.
-    digitalWrite( LED , LOW );
+    digitalWrite(LED , LOW);
     delay(50);
-
-
-
-                                              /* For second task press on first button.*/
+                                                /* For second task press on first button.*/
 
                           /* The same as previous except if the led is on the motor stops else the motor rotates. */
       /***********   second task is about motor is off when light intensity is high and it is on when light intensity is low   ***********/
-
-   while(case2)
-   {
-     
+  while(case2)
+  {
     digitalWrite( LED , HIGH );
     delay(50);
 
@@ -85,31 +72,23 @@ void loop()
 
     // If the value read is more than the threshold then the motor is on, else the motor is off. 
 
-      if( LDR_Value >= value )    // ldr value is high over our own set threshold which means light intensity is low
+      if( LDR_Value >= VALUE )    // ldr value is high over our own set threshold which means light intensity is low
       {
-         digitalWrite(MOTOR_SPEED_CONTROL_PIN,HIGH);
-         digitalWrite(MOTOR_PIN_1,HIGH);
-         digitalWrite(MOTOR_PIN_2,LOW);
-      } 
+         digitalWrite(MOTOR, HIGH);
+      }
       else    // ldr value is small below our own set threshold which means light intensity is high
       {
-         digitalWrite(MOTOR_SPEED_CONTROL_PIN,LOW);
+         digitalWrite(MOTOR, LOW);
       }
 
-     
     
     digitalWrite( LED , LOW );
     delay(50);
+  }
 
-    
-   }
-
-                           /*For third task press on the two buttons.*/
-
-   while(case3)
-   {
-      // Read the potentiometer value (0-1023).
-      PotValue = analogRead(POT); 
+  while(case3)
+  {
+     PotValue = analogRead(POT); 
 
       // Map the potentiometer value to a PWM range (0-255).
       LED_Intensity = map(PotValue, 0, 1023, 0, 255);
@@ -125,10 +104,7 @@ void loop()
       MotorSpeed = map(LDR_Value , 0 , 1023 , 0 , 255 );
 
       // Control the speed of the motor according to LDR value which depends on LED intensity controlled bypotentiometer.
-      analogWrite(MOTOR_SPEED_CONTROL_PIN,MotorSpeed);
-      digitalWrite(MOTOR_PIN_1,HIGH);
-      digitalWrite(MOTOR_PIN_2,LOW);
-
+      analogWrite(MOTOR, MotorSpeed);
   }
 
 }
