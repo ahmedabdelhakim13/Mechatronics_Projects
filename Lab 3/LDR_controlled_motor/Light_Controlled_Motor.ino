@@ -1,3 +1,4 @@
+// Simulation Link: https://www.tinkercad.com/things/eh7FNVRTK77-lab-3-light-controlled-motor
 #define POT              A0   // Analog input pin for the potentiometer.
 #define LDR              A1   // Analog input pin for the LDR.
 #define LED              6    // LED pin.
