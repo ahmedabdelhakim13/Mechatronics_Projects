@@ -2,23 +2,24 @@
 #define motor_pin 3
 #define led 5
 #define pot 7
-#define start 8
+#define st 8
 #define push1 9
-#define push1 10
+#define push2 10
 /////////////////////////////////////////////////////////////////////////////////////////
 int start=0; 
 int stat1=0;
 int stat2=0;
 int Ldr_value=0;
 int speed=0;
+int pot_value=0;
 ///////////////////////////////////////////////////////////////////////////////////
 
 void setup() {
   Serial.begin(9600);
-  pinMOde(start,INPUT)
-  pinMOde(push1,INPUT)
-  pinMOde(push2,INPUT)
-  pinMode(Led,OUTPUT);
+  pinMode(st,INPUT);
+  pinMode(push1,INPUT);
+  pinMode(push2,INPUT);
+  pinMode(led,OUTPUT);
   pinMode(LDR,OUTPUT);
   pinMode(motor_pin,OUTPUT);
 }
@@ -46,24 +47,46 @@ void func1()
   if(start)
   {
     digitalWrite(led ,HIGH);
-    Ldr_value = analogRead(LDR);
-    if(Ldr_value>300)
-    {
     digitalWrite(motor_pin,200);
     delay(2000);
     }
+    else if(!start)
+    {
+    digitalWrite(led ,LOW);
+    digitalWrite(motor_pin,0);
+    delay(2000);
+
+    }
+
   }
   void func2()
   {
     if(start)
   {
     digitalWrite(led ,LOW);
-    Ldr_value = analogRead(LDR);
     //speed =map(Ldr_value,0,1023,0,286);
-    if(Ldr_value>300)
-    {
     digitalWrite(motor_pin,200);
     delay(2000);
-    }
   }
+  else if(!start)
+    {
+    digitalWrite(led ,HIGH);
+    digitalWrite(motor_pin,0);
+    delay(2000);
+
+    }
+}
+void func3()
+{
+  if(start)
+  {
+    PotValue = analogRead(POT);
+    
+    digitalWrite(led ,LOW);
+    //speed =map(Ldr_value,0,1023,0,286);
+    digitalWrite(motor_pin,200);
+    delay(2000);
+    
+  }
+
 }
