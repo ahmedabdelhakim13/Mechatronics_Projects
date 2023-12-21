@@ -100,9 +100,9 @@ void loop()
       // Read the LDR value (0-1023).
       LDR_Value = analogRead(LDR); 
       delay(50);
-
+      Serial.println(LDR_Value);
       // Map the LDR value to a PWM range (0-255).
-      MotorSpeed = map(LDR_Value , 0 , 1023 , 0 , 255 );
+      MotorSpeed = map(LDR_Value , 0 , 150 , 0 , 255 );
 
       // Control the speed of the motor according to LDR value which depends on LED intensity controlled bypotentiometer.
       analogWrite(MOTOR, MotorSpeed);
